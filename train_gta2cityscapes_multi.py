@@ -297,7 +297,7 @@ def main():
 
             # train with source
 
-            _, batch = trainloader_iter.next()
+            _, batch = next(trainloader_iter)
             images, labels, _, _ = batch
             images = Variable(images).cuda(args.gpu)
 

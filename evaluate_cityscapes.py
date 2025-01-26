@@ -27,8 +27,10 @@ DATA_LIST_PATH = './dataset/cityscapes_list/val.txt'
 SAVE_PATH = './result/cityscapes'
 
 IGNORE_LABEL = 255
-NUM_CLASSES = 19
-NUM_STEPS = 500 # Number of images in the validation set.
+# NUM_CLASSES = 19
+NUM_CLASSES = 1
+# NUM_STEPS = 500 # Number of images in the validation set.
+NUM_STEPS = 30 # Number of images in the validation set.
 RESTORE_FROM = 'http://vllab.ucmerced.edu/ytsai/CVPR18/GTA2Cityscapes_multi-ed35151c.pth'
 RESTORE_FROM_VGG = 'http://vllab.ucmerced.edu/ytsai/CVPR18/GTA2Cityscapes_vgg-ac4ac9f6.pth'
 RESTORE_FROM_ORC = 'http://vllab1.ucmerced.edu/~whung/adaptSeg/cityscapes_oracle-b7b9934.pth'

@@ -133,6 +133,8 @@ def main():
             print('%d processed' % index)
 
         image, _, name = batch
+        print(f"Batch {idx + 1}: {name}")
+
         if args.model == 'DeeplabMulti':
             # output1, output2 = model(Variable(image, volatile=True).cuda(gpu0))
             # Use torch.no_grad to avoid computing gradients during evaluation

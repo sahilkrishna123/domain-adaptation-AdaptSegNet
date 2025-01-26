@@ -43,7 +43,7 @@ DATA_LIST_PATH_TARGET = './dataset/cityscapes_list/train.txt'
 INPUT_SIZE_TARGET = '1024,512'
 LEARNING_RATE = 2.5e-4
 MOMENTUM = 0.9
-NUM_CLASSES = 1
+NUM_CLASSES = 19
 # NUM_STEPS = 250000
 # NUM_STEPS_STOP = 150000  # early stopping
 

@@ -42,7 +42,9 @@ NUM_STEPS_STOP = 150000  # early stopping
 POWER = 0.9
 RANDOM_SEED = 1234
 # RESTORE_FROM = 'http://vllab.ucmerced.edu/ytsai/CVPR18/DeepLab_resnet_pretrained_init-f81d91e8.pth'
-RESTORE_FROM = 'https://drive.google.com/uc?export=download&id=1hGjoN6w2vsTPrufJs3elJHKwYykD-6hQ'
+# RESTORE_FROM = 'https://drive.google.com/uc?export=download&id=1hGjoN6w2vsTPrufJs3elJHKwYykD-6hQ'
+RESTORE_FROM = '/root/.cache/torch/hub/checkpoints/DeepLab_resnet_pretrained_init.pth'
+
 SAVE_NUM_IMAGES = 2
 SAVE_PRED_EVERY = 5000
 SNAPSHOT_DIR = './snapshots/'

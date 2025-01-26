@@ -21,6 +21,14 @@ class cityscapesDataSet(data.Dataset):
         # self.mean_bgr = np.array([104.00698793, 116.66876762, 122.67891434])
         self.img_ids = [i_id.strip() for i_id in open(list_path)]
 
+
+        if not max_iters==None:
+            self.img_ids = self.img_ids * int(np.ceil(float(max_iters) / len(self.img_ids)))
+        self.files = []
+        self.set = set
+        
+        
+        
         # Read image paths from the list
         self.img_ids = [i_id.strip() for i_id in open(list_path)]
         
@@ -28,11 +36,8 @@ class cityscapesDataSet(data.Dataset):
         print(f"Reading image paths from {list_path}:")
         for img_id in self.img_ids:
             print(f"Image path: {osp.join(self.root, '%s/%s/%s' % (self.set, 'img', img_id))}")
-
-        if not max_iters==None:
-            self.img_ids = self.img_ids * int(np.ceil(float(max_iters) / len(self.img_ids)))
-        self.files = []
-        self.set = set
+        
+        # ends here
         # for split in ["train", "trainval", "val"]:
         for name in self.img_ids:
             img_file = osp.join(self.root, "%s/%s/%s" % (self.set,"img", name))

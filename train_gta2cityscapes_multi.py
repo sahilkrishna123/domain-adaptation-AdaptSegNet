@@ -408,8 +408,13 @@ def main():
             loss_D1.backward()
             loss_D2.backward()
 
-            loss_D_value1 += loss_D1.data.cpu().numpy()[0]
-            loss_D_value2 += loss_D2.data.cpu().numpy()[0]
+            # loss_D_value1 += loss_D1.data.cpu().numpy()[0]
+            # loss_D_value2 += loss_D2.data.cpu().numpy()[0]
+
+            loss_D_value1 += loss_D1.item()
+            loss_D_value2 += loss_D2.item()
+
+
 
         optimizer.step()
         optimizer_D1.step()

@@ -105,7 +105,9 @@ def main():
     if args.restore_from[:4] == 'http' :
         saved_state_dict = model_zoo.load_url(args.restore_from)
     else:
-        saved_state_dict = torch.load(args.restore_from)
+        # saved_state_dict = torch.load(args.restore_from)
+        saved_state_dict = torch.load(args.restore_from, weights_only=True)
+
     ### for running different versions of pytorch
     model_dict = model.state_dict()
     saved_state_dict = {k: v for k, v in saved_state_dict.items() if k in model_dict}
@@ -132,7 +134,11 @@ def main():
 
         image, _, name = batch
         if args.model == 'DeeplabMulti':
-            output1, output2 = model(Variable(image, volatile=True).cuda(gpu0))
+            # output1, output2 = model(Variable(image, volatile=True).cuda(gpu0))
+            # Use torch.no_grad to avoid computing gradients during evaluation
+            with torch.no_grad():
+                output1, output2 = model(image.cuda(gpu0))
+
             output = interp(output2).cpu().data[0].numpy()
         elif args.model == 'DeeplabVGG' or args.model == 'Oracle':
             output = model(Variable(image, volatile=True).cuda(gpu0))

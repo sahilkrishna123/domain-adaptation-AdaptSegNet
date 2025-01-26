@@ -323,9 +323,11 @@ def main():
 
             # _, batch = targetloader_iter.next()
             _, batch = next(trainloader_iter)
-            print("Batches are:")
-            print(batch)
-            images, _, _ = batch
+            # print("Batches are:")
+            # print(batch)
+            # images, _, _ = batch
+            # Corrected code 
+            images, labels, sizes, filenames = batch
             images = Variable(images).cuda(args.gpu)
 
             pred_target1, pred_target2 = model(images)

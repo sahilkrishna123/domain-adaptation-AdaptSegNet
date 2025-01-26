@@ -312,8 +312,12 @@ def main():
             # proper normalization
             loss = loss / args.iter_size
             loss.backward()
-            loss_seg_value1 += loss_seg1.data.cpu().numpy()[0] / args.iter_size
-            loss_seg_value2 += loss_seg2.data.cpu().numpy()[0] / args.iter_size
+            # loss_seg_value1 += loss_seg1.data.cpu().numpy()[0] / args.iter_size
+            
+            loss_seg_value1 += loss_seg1.item() / args.iter_size
+            loss_seg_value2 += loss_seg2.item() / args.iter_size
+
+            # loss_seg_value2 += loss_seg2.data.cpu().numpy()[0] / args.iter_size
 
             # train with target
 

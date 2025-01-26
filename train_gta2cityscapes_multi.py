@@ -28,17 +28,17 @@ BATCH_SIZE = 1
 ITER_SIZE = 1
 NUM_WORKERS = 4
 # Updated Kaggle code 
-DATA_DIRECTORY = '/kaggle/input/cityspaces-and-gta5-refined-dataset/Gta-Refined/Gta-Refined'
-DATA_DIRECTORY_TARGET = '/kaggle/input/cityspaces-and-gta5-refined-dataset/CitySpace- Refine version/CitySpace- Refine version/train'
+# DATA_DIRECTORY = '/kaggle/input/cityspaces-and-gta5-refined-dataset/Gta-Refined/Gta-Refined'
+# DATA_DIRECTORY_TARGET = '/kaggle/input/cityspaces-and-gta5-refined-dataset/CitySpace- Refine version/CitySpace- Refine version/train'
 # DATA_LIST_PATH = '/kaggle/input/<your-gta5-dataset-folder>/train.txt'
 # DATA_LIST_PATH_TARGET = '/kaggle/input/<your-cityscapes-dataset-folder>/train.txt'
 
 # Ends here
-# DATA_DIRECTORY = './data/GTA5'
+DATA_DIRECTORY = './data/GTA5'
 DATA_LIST_PATH = './dataset/gta5_list/train.txt'
 IGNORE_LABEL = 255
 INPUT_SIZE = '1280,720'
-# DATA_DIRECTORY_TARGET = './data/Cityscapes/data'
+DATA_DIRECTORY_TARGET = './data/Cityscapes/data'
 DATA_LIST_PATH_TARGET = './dataset/cityscapes_list/train.txt'
 INPUT_SIZE_TARGET = '1024,512'
 LEARNING_RATE = 2.5e-4

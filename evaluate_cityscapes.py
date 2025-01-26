@@ -125,7 +125,9 @@ def main():
 
     for index, batch in enumerate(testloader):
         if index % 100 == 0:
-            print '%d processd' % index
+            
+            print('%d processed' % index)
+
         image, _, name = batch
         if args.model == 'DeeplabMulti':
             output1, output2 = model(Variable(image, volatile=True).cuda(gpu0))

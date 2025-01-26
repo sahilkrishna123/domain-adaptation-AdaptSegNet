@@ -348,8 +348,12 @@ def main():
             loss = args.lambda_adv_target1 * loss_adv_target1 + args.lambda_adv_target2 * loss_adv_target2
             loss = loss / args.iter_size
             loss.backward()
-            loss_adv_target_value1 += loss_adv_target1.data.cpu().numpy()[0] / args.iter_size
-            loss_adv_target_value2 += loss_adv_target2.data.cpu().numpy()[0] / args.iter_size
+            # loss_adv_target_value1 += loss_adv_target1.data.cpu().numpy()[0] / args.iter_size
+            loss_adv_target_value1 += loss_adv_target1.item() / args.iter_size
+            
+            # loss_adv_target_value2 += loss_adv_target2.data.cpu().numpy()[0] / args.iter_size
+            loss_adv_target_value2 += loss_adv_target2.item() / args.iter_size
+
 
             # train D
 

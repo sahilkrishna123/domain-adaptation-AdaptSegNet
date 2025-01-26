@@ -27,7 +27,9 @@ class cityscapesDataSet(data.Dataset):
         # for split in ["train", "trainval", "val"]:
         for name in self.img_ids:
             # img_file = osp.join(self.root, "leftImg8bit/%s/%s" % (self.set, name))
-            img_file = osp.join(self.root, "%s/%s" % (self.set, name))
+            # img_file = osp.join(self.root, "%s/%s" % (self.set, name))
+            img_file = osp.join(self.root, self.set, "img", f"{name}")
+
             self.files.append({
                 "img": img_file,
                 "name": name

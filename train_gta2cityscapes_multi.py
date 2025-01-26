@@ -321,7 +321,8 @@ def main():
 
             # train with target
 
-            _, batch = targetloader_iter.next()
+            # _, batch = targetloader_iter.next()
+            _, batch = next(trainloader_iter)
             images, _, _ = batch
             images = Variable(images).cuda(args.gpu)
 

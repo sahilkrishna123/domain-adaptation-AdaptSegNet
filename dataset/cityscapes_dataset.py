@@ -26,7 +26,7 @@ class cityscapesDataSet(data.Dataset):
         self.set = set
         # for split in ["train", "trainval", "val"]:
         for name in self.img_ids:
-            img_file = osp.join(self.root, "leftImg8bit/%s/%s" % (self.set, name))
+            img_file = osp.join(self.root, "%s/%s" % (self.set, name))
             self.files.append({
                 "img": img_file,
                 "name": name
@@ -55,7 +55,7 @@ class cityscapesDataSet(data.Dataset):
 
 
 if __name__ == '__main__':
-    dst = GTA5DataSet("./data", is_transform=True)
+    dst = GTA5DataSet("./", is_transform=True)
     trainloader = data.DataLoader(dst, batch_size=4)
     for i, data in enumerate(trainloader):
         imgs, labels = data

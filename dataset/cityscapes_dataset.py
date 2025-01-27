@@ -46,12 +46,18 @@ class cityscapesDataSet(data.Dataset):
                 "name": name
             })
 
+        print(f"Dataset initialized with {len(self.files)} files.")
+
+
     def __len__(self):
         return len(self.files)
 
     def __getitem__(self, index):
         datafiles = self.files[index]
-
+        #debugging lines
+        file_path = self.files[index]
+        print(f"Loading file: {file_path}")
+        ######
         image = Image.open(datafiles["img"]).convert('RGB')
         name = datafiles["name"]
 

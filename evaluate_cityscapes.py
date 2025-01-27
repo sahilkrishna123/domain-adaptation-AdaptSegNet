@@ -115,6 +115,11 @@ def main():
     ###
     model.load_state_dict(saved_state_dict)
 
+    print("Model weights loaded successfully.")
+    print(f"Model state dict keys: {model.state_dict().keys()}")
+    print(f"Loaded state dict keys: {saved_state_dict.keys()}")
+
+
     model.eval()
     model.cuda(gpu0)
 
@@ -128,9 +133,10 @@ def main():
         interp = nn.Upsample(size=(1024, 2048), mode='bilinear')
 
     for index, batch in enumerate(testloader):
-        if index % 100 == 0:
-            
-            print('%d processed' % index)
+        # if index % 100 == 0:
+        #     print('%d processed' % index)
+        if index % 10 == 0:  # For every 10 batches
+            print(f'{index + 1} processed')
 
         image, _, name = batch
         print(f"Batch {index + 1}: {name}")
@@ -140,6 +146,10 @@ def main():
             # Use torch.no_grad to avoid computing gradients during evaluation
             with torch.no_grad():
                 output1, output2 = model(image.cuda(gpu0))
+                
+                print(f"Output1 shape: {output1.shape}")
+                print(f"Output2 shape: {output2.shape}")
+
 
             output = interp(output2).cpu().data[0].numpy()
         elif args.model == 'DeeplabVGG' or args.model == 'Oracle':
@@ -148,6 +158,9 @@ def main():
 
         output = output.transpose(1,2,0)
         output = np.asarray(np.argmax(output, axis=2), dtype=np.uint8)
+
+        print(f"Output mask shape: {output.shape}, unique values: {np.unique(output)}")
+
 
         output_col = colorize_mask(output)
         output = Image.fromarray(output)

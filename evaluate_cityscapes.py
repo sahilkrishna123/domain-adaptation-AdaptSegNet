@@ -146,7 +146,10 @@ def main():
 
         image, _, name = batch
         print(f"Batch {index + 1}: {name}")
+
 # GPT code to save preprocessed image
+        image_tensor, size, name = batch  # image_tensor shape: [batch, channels, height, width]
+
         image_name = name[0]  # assuming batch size is 1 for simplicity
 
         # Save the preprocessed image before segmentation

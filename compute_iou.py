@@ -33,9 +33,9 @@ def compute_mIoU(gt_dir, pred_dir, devkit_dir=''):
 
     print('Num classes', num_classes)
     # name_classes = np.array(info['label'], dtype=np.str)
-    name_classes = np.array(info['label'], dtype=str)  # Use the built-in `str`
+    name_classes = np.array(info['label'], dtype=str)  # Use built-in `str`
 
-    mapping = np.array(info['label2train'], dtype=np.int)
+    mapping = np.array(info['label2train'], dtype=np.int64)
     hist = np.zeros((num_classes, num_classes))
 
     image_path_list = join(devkit_dir, 'val.txt')

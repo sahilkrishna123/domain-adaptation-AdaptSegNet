@@ -22,6 +22,12 @@ import matplotlib.pyplot as plt
 import torch.nn as nn
 IMG_MEAN = np.array((104.00698793,116.66876762,122.67891434), dtype=np.float32)
 
+# Create the output directory for preprocessed images if it doesn't exist
+preprocessed_dir = '/kaggle/working/preprocessed'
+os.makedirs(preprocessed_dir, exist_ok=True)
+
+
+
 DATA_DIRECTORY = './data/Cityscapes/data'
 DATA_LIST_PATH = './dataset/cityscapes_list/val.txt'
 SAVE_PATH = './result/cityscapes'
@@ -116,8 +122,8 @@ def main():
     model.load_state_dict(saved_state_dict)
 
     print("Model weights loaded successfully.")
-    print(f"Model state dict keys: {model.state_dict().keys()}")
-    print(f"Loaded state dict keys: {saved_state_dict.keys()}")
+    # print(f"Model state dict keys: {model.state_dict().keys()}")
+    # print(f"Loaded state dict keys: {saved_state_dict.keys()}")
 
 
     model.eval()
@@ -135,11 +141,46 @@ def main():
     for index, batch in enumerate(testloader):
         # if index % 100 == 0:
         #     print('%d processed' % index)
-        if index % 10 == 0:  # For every 10 batches
-            print(f'{index + 1} processed')
+        # if index % 10 == 0:  # For every 10 batches
+            # print(f'{index + 1} processed')
 
         image, _, name = batch
         print(f"Batch {index + 1}: {name}")
+# GPT code to save preprocessed image
+        image_name = name[0]  # assuming batch size is 1 for simplicity
+
+        # Save the preprocessed image before segmentation
+        # The image is currently in BGR order and mean subtracted.
+        # We'll convert it back to a viewable RGB image.
+        preprocessed_image = image_tensor.squeeze(0).cpu().numpy()  # shape: [3, H, W]
+    
+        # Transpose to H x W x C
+        preprocessed_image = preprocessed_image.transpose(1, 2, 0)  # Now shape: [H, W, 3]
+        
+        # Reverse the mean subtraction and BGR conversion.
+        # Use the same mean as used during preprocessing.
+        mean = np.array([128, 128, 128], dtype=np.float32)
+        
+        # Add the mean back
+        preprocessed_image = preprocessed_image + mean
+        
+        # Convert from BGR to RGB
+        preprocessed_image = preprocessed_image[:, :, ::-1]
+        
+        # Clip to valid pixel range and convert to uint8
+        preprocessed_image = np.clip(preprocessed_image, 0, 255).astype(np.uint8)
+        
+        # Save using PIL
+        preprocessed_pil = Image.fromarray(preprocessed_image)
+        preprocessed_save_path = os.path.join(preprocessed_dir, image_name)
+        preprocessed_pil.save(preprocessed_save_path)
+        print(f"Saved preprocessed image: {preprocessed_save_path}")
+
+
+
+# ends here
+
+
 
         if args.model == 'DeeplabMulti':
             # output1, output2 = model(Variable(image, volatile=True).cuda(gpu0))
